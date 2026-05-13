@@ -3,60 +3,247 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SolitaireDeck – Classic Card Game</title>
+  <title>SolitaireDeck – Classic Card Games</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #050e08;
-      color: #e8f0ec;
+      background: #0f2d1a;
+      color: #e8f5ec;
       min-height: 100vh;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
-    .stars {
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 20% 50%, #061a0e 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, #041208 0%, transparent 60%),
-        radial-gradient(ellipse at 60% 80%, #071a10 0%, transparent 50%),
-        #050e08;
-      z-index: 0;
-    }
-
+    /* Falling cards */
     .cards-bg {
       position: fixed;
       inset: 0;
-      z-index: 1;
       pointer-events: none;
+      z-index: 0;
     }
-
-    .card {
+    .fc {
       position: absolute;
+      top: -90px;
       width: 52px;
       height: 74px;
-      border-radius: 8px;
-      background: #f0f8f2;
+      border-radius: 7px;
+      background: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 22px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
       opacity: 0;
-      animation: floatCard linear infinite;
+      animation: fall linear infinite;
+    }
+    .fc .tl {
+      position: absolute;
+      top: 4px; left: 5px;
+      font-size: 10px; font-weight: 800;
+      line-height: 1.2; text-align: left;
+    }
+    .fc .br {
+      position: absolute;
+      bottom: 4px; right: 5px;
+      font-size: 10px; font-weight: 800;
+      transform: rotate(180deg);
+    }
+    .fc.red   { color: #cc2233; }
+    .fc.black { color: #1a1a2e; }
+
+    @keyframes fall {
+      0%   { transform: translateY(0) rotate(var(--r)); opacity: 0; }
+      6%   { opacity: 0.75; }
+      92%  { opacity: 0.5; }
+      100% { transform: translateY(110vh) rotate(calc(var(--r) + var(--spin))); opacity: 0; }
     }
 
-    .card::before {
-      content: attr(data-val);
-      position: absolute;
-      top: 4px;
-      left: 6px;
-      font-size: 11px;
-      font-weight: 700;
-      line
+    /* Content */
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .icon {
+      font-size: 72px;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 0 24px rgba(46,204,113,0.4));
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #e8f5ec;
+      margin-bottom: 6px;
+    }
+
+    .sub {
+      font-size: 1rem;
+      color: #7eb896;
+      margin-bottom: 40px;
+    }
+
+    .links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    .btn {
+      text-decoration: none;
+      color: #e8f5ec;
+      padding: 11px 26px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      border: 1px solid rgba(46,204,113,0.3);
+      background: rgba(46,204,113,0.08);
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      border-color: rgba(46,204,113,0.7);
+      background: rgba(46,204,113,0.15);
+    }
+
+    .store-btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    .store-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #e8f5ec;
+      padding: 11px 22px;
+      border-radius: 12px;
+      border: 1px solid rgba(46,204,113,0.25);
+      background: rgba(15,45,26,0.8);
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .store-btn:hover {
+      border-color: rgba(46,204,113,0.6);
+      background: rgba(46,204,113,0.1);
+    }
+    .store-btn .ico { font-size: 20px; }
+    .store-btn small { display: block; font-size: 0.7rem; color: #7eb896; }
+
+    .divider {
+      width: 48px; height: 1px;
+      background: rgba(46,204,113,0.2);
+      margin-bottom: 20px;
+    }
+
+    .contact {
+      font-size: 0.88rem;
+      color: #4a8c5c;
+    }
+    .contact a {
+      color: #2ecc71;
+      text-decoration: none;
+    }
+    .contact a:hover { text-decoration: underline; }
+
+    .suits {
+      position: fixed;
+      bottom: 20px;
+      font-size: 22px;
+      opacity: 0.1;
+      letter-spacing: 16px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="cards-bg" id="bg"></div>
+
+<div class="content">
+  <div class="icon">♠</div>
+
+  <h1>SolitaireDeck</h1>
+  <p class="sub">Classic Solitaire Games for Mobile</p>
+
+  <div class="links">
+    <a class="btn" href="/privacy.html">Privacy Policy</a>
+    <a class="btn" href="/terms.html">Terms of Use</a>
+  </div>
+
+  <div class="store-btns">
+    <a class="store-btn" href="#">
+      <span class="ico">🍎</span>
+      <span><small>Download on the</small>App Store</span>
+    </a>
+    <a class="store-btn" href="#">
+      <span class="ico">▶</span>
+      <span><small>Get it on</small>Google Play</span>
+    </a>
+  </div>
+
+  <div class="divider"></div>
+  <div class="contact">
+    Support: <a href="mailto:support@SolitaireDeck.com">support@SolitaireDeck.com</a>
+  </div>
+</div>
+
+<div class="suits">♠ ♥ ♦ ♣</div>
+
+<script>
+  var CARDS = [
+    {v:'A',s:'♠',c:'black'},{v:'K',s:'♥',c:'red'},
+    {v:'Q',s:'♦',c:'red'}, {v:'J',s:'♣',c:'black'},
+    {v:'10',s:'♠',c:'black'},{v:'9',s:'♥',c:'red'},
+    {v:'8',s:'♦',c:'red'}, {v:'7',s:'♣',c:'black'},
+    {v:'A',s:'♥',c:'red'}, {v:'K',s:'♠',c:'black'},
+    {v:'Q',s:'♣',c:'black'},{v:'J',s:'♦',c:'red'},
+    {v:'6',s:'♠',c:'black'},{v:'5',s:'♥',c:'red'},
+  ];
+
+  var bg = document.getElementById('bg');
+
+  CARDS.forEach(function(c) {
+    var el = document.createElement('div');
+    el.className = 'fc ' + c.c;
+    el.innerHTML =
+      '<span class="tl">'+c.v+'<br>'+c.s+'</span>' +
+      c.s +
+      '<span class="br">'+c.v+'<br>'+c.s+'</span>';
+
+    var left = 3 + Math.random() * 93;
+    var dur  = 10 + Math.random() * 14;
+    var del  = -(Math.random() * dur);
+    var rot  = -25 + Math.random() * 50;
+    var spin = (Math.random() > 0.5 ? 1 : -1) * (20 + Math.random() * 40);
+
+    el.style.left = left + '%';
+    el.style.animationDuration = dur + 's';
+    el.style.animationDelay = del + 's';
+    el.style.setProperty('--r', rot + 'deg');
+    el.style.setProperty('--spin', spin + 'deg');
+
+    bg.appendChild(el);
+  });
+</script>
+
+</body>
+</html>
