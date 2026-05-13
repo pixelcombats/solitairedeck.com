@@ -9,7 +9,7 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0f2d1a;
+      background: radial-gradient(circle at 50% 0%, #1d4f2f 0%, #0f2d1a 42%, #091d11 100%);
       color: #e8f5ec;
       min-height: 100vh;
       display: flex;
@@ -19,13 +19,13 @@
       overflow: hidden;
     }
 
-    /* Falling cards */
     .cards-bg {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 0;
     }
+
     .fc {
       position: absolute;
       top: -90px;
@@ -41,29 +41,36 @@
       opacity: 0;
       animation: fall linear infinite;
     }
+
     .fc .tl {
       position: absolute;
-      top: 4px; left: 5px;
-      font-size: 10px; font-weight: 800;
-      line-height: 1.2; text-align: left;
+      top: 4px;
+      left: 5px;
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-align: left;
     }
+
     .fc .br {
       position: absolute;
-      bottom: 4px; right: 5px;
-      font-size: 10px; font-weight: 800;
+      bottom: 4px;
+      right: 5px;
+      font-size: 10px;
+      font-weight: 800;
       transform: rotate(180deg);
     }
-    .fc.red   { color: #cc2233; }
+
+    .fc.red { color: #cc2233; }
     .fc.black { color: #1a1a2e; }
 
     @keyframes fall {
-      0%   { transform: translateY(0) rotate(var(--r)); opacity: 0; }
-      6%   { opacity: 0.75; }
-      92%  { opacity: 0.5; }
+      0% { transform: translateY(0) rotate(var(--r)); opacity: 0; }
+      6% { opacity: 0.75; }
+      92% { opacity: 0.5; }
       100% { transform: translateY(110vh) rotate(calc(var(--r) + var(--spin))); opacity: 0; }
     }
 
-    /* Content */
     .content {
       position: relative;
       z-index: 1;
@@ -72,13 +79,68 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0;
     }
 
-    .icon {
-      font-size: 72px;
-      margin-bottom: 24px;
-      filter: drop-shadow(0 0 24px rgba(46,204,113,0.4));
+    .hero-cards {
+      position: relative;
+      width: 150px;
+      height: 122px;
+      margin-bottom: 28px;
+      filter: drop-shadow(0 18px 40px rgba(0,0,0,0.35));
+    }
+
+    .hero-card {
+      position: absolute;
+      width: 84px;
+      height: 112px;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.08),
+        0 10px 28px rgba(0,0,0,0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-card .corner {
+      position: absolute;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.05;
+      text-align: center;
+    }
+
+    .hero-card .corner.tl {
+      top: 7px;
+      left: 8px;
+    }
+
+    .hero-card .corner.br {
+      right: 8px;
+      bottom: 7px;
+      transform: rotate(180deg);
+    }
+
+    .hero-card .center {
+      font-size: 44px;
+      line-height: 1;
+    }
+
+    .hero-card.spade {
+      left: 4px;
+      top: 10px;
+      z-index: 2;
+      color: #111;
+      transform: rotate(-8deg);
+    }
+
+    .hero-card.heart {
+      right: 4px;
+      top: 0;
+      z-index: 1;
+      color: #d0202a;
+      transform: rotate(8deg);
     }
 
     h1 {
@@ -91,8 +153,8 @@
 
     .sub {
       font-size: 1rem;
-      color: #7eb896;
-      margin-bottom: 40px;
+      color: #9ed3ae;
+      margin-bottom: 38px;
     }
 
     .links {
@@ -100,7 +162,7 @@
       gap: 12px;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 48px;
+      margin-bottom: 34px;
     }
 
     .btn {
@@ -110,13 +172,16 @@
       border-radius: 12px;
       font-size: 0.92rem;
       font-weight: 500;
-      border: 1px solid rgba(46,204,113,0.3);
-      background: rgba(46,204,113,0.08);
+      border: 1px solid rgba(46,204,113,0.32);
+      background: rgba(46,204,113,0.09);
+      backdrop-filter: blur(8px);
       transition: all 0.2s;
     }
+
     .btn:hover {
-      border-color: rgba(46,204,113,0.7);
-      background: rgba(46,204,113,0.15);
+      border-color: rgba(46,204,113,0.75);
+      background: rgba(46,204,113,0.16);
+      transform: translateY(-1px);
     }
 
     .store-btns {
@@ -124,7 +189,7 @@
       gap: 12px;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 48px;
+      margin-bottom: 44px;
     }
 
     .store-btn {
@@ -136,41 +201,87 @@
       padding: 11px 22px;
       border-radius: 12px;
       border: 1px solid rgba(46,204,113,0.25);
-      background: rgba(15,45,26,0.8);
+      background: rgba(9,29,17,0.72);
       font-size: 0.88rem;
       font-weight: 500;
       transition: all 0.2s;
+      backdrop-filter: blur(8px);
     }
+
     .store-btn:hover {
-      border-color: rgba(46,204,113,0.6);
+      border-color: rgba(46,204,113,0.65);
       background: rgba(46,204,113,0.1);
+      transform: translateY(-1px);
     }
-    .store-btn .ico { font-size: 20px; }
-    .store-btn small { display: block; font-size: 0.7rem; color: #7eb896; }
+
+    .store-btn .ico {
+      font-size: 20px;
+    }
+
+    .store-btn small {
+      display: block;
+      font-size: 0.7rem;
+      color: #9ed3ae;
+      line-height: 1.1;
+    }
 
     .divider {
-      width: 48px; height: 1px;
-      background: rgba(46,204,113,0.2);
+      width: 48px;
+      height: 1px;
+      background: rgba(46,204,113,0.25);
       margin-bottom: 20px;
     }
 
     .contact {
       font-size: 0.88rem;
-      color: #4a8c5c;
+      color: #70a47f;
     }
+
     .contact a {
       color: #2ecc71;
       text-decoration: none;
     }
-    .contact a:hover { text-decoration: underline; }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
 
     .suits {
       position: fixed;
       bottom: 20px;
       font-size: 22px;
-      opacity: 0.1;
+      opacity: 0.12;
       letter-spacing: 16px;
       z-index: 1;
+      color: #9ed3ae;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        justify-content: flex-start;
+        padding-top: 48px;
+        overflow-y: auto;
+      }
+
+      .content {
+        padding: 28px 18px;
+      }
+
+      .links,
+      .store-btns {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+      }
+
+      .btn,
+      .store-btn {
+        justify-content: center;
+      }
+
+      .suits {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -179,7 +290,18 @@
 <div class="cards-bg" id="bg"></div>
 
 <div class="content">
-  <div class="icon">♠</div>
+  <div class="hero-cards">
+    <div class="hero-card spade">
+      <span class="corner tl">A<br>♠</span>
+      <span class="center">♠</span>
+      <span class="corner br">A<br>♠</span>
+    </div>
+    <div class="hero-card heart">
+      <span class="corner tl">K<br>♥</span>
+      <span class="center">♥</span>
+      <span class="corner br">K<br>♥</span>
+    </div>
+  </div>
 
   <h1>SolitaireDeck</h1>
   <p class="sub">Classic Solitaire Games for Mobile</p>
@@ -210,29 +332,30 @@
 
 <script>
   var CARDS = [
-    {v:'A',s:'♠',c:'black'},{v:'K',s:'♥',c:'red'},
-    {v:'Q',s:'♦',c:'red'}, {v:'J',s:'♣',c:'black'},
-    {v:'10',s:'♠',c:'black'},{v:'9',s:'♥',c:'red'},
-    {v:'8',s:'♦',c:'red'}, {v:'7',s:'♣',c:'black'},
-    {v:'A',s:'♥',c:'red'}, {v:'K',s:'♠',c:'black'},
-    {v:'Q',s:'♣',c:'black'},{v:'J',s:'♦',c:'red'},
-    {v:'6',s:'♠',c:'black'},{v:'5',s:'♥',c:'red'},
+    {v:'A',s:'♠',c:'black'}, {v:'K',s:'♥',c:'red'},
+    {v:'Q',s:'♦',c:'red'},  {v:'J',s:'♣',c:'black'},
+    {v:'10',s:'♠',c:'black'}, {v:'9',s:'♥',c:'red'},
+    {v:'8',s:'♦',c:'red'},  {v:'7',s:'♣',c:'black'},
+    {v:'A',s:'♥',c:'red'},  {v:'K',s:'♠',c:'black'},
+    {v:'Q',s:'♣',c:'black'}, {v:'J',s:'♦',c:'red'},
+    {v:'6',s:'♠',c:'black'}, {v:'5',s:'♥',c:'red'}
   ];
 
   var bg = document.getElementById('bg');
 
-  CARDS.forEach(function(c) {
+  for (var i = 0; i < CARDS.length; i++) {
+    var c = CARDS[i];
     var el = document.createElement('div');
     el.className = 'fc ' + c.c;
     el.innerHTML =
-      '<span class="tl">'+c.v+'<br>'+c.s+'</span>' +
+      '<span class="tl">' + c.v + '<br>' + c.s + '</span>' +
       c.s +
-      '<span class="br">'+c.v+'<br>'+c.s+'</span>';
+      '<span class="br">' + c.v + '<br>' + c.s + '</span>';
 
     var left = 3 + Math.random() * 93;
-    var dur  = 10 + Math.random() * 14;
-    var del  = -(Math.random() * dur);
-    var rot  = -25 + Math.random() * 50;
+    var dur = 10 + Math.random() * 14;
+    var del = -(Math.random() * dur);
+    var rot = -25 + Math.random() * 50;
     var spin = (Math.random() > 0.5 ? 1 : -1) * (20 + Math.random() * 40);
 
     el.style.left = left + '%';
@@ -242,7 +365,7 @@
     el.style.setProperty('--spin', spin + 'deg');
 
     bg.appendChild(el);
-  });
+  }
 </script>
 
 </body>
