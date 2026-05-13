@@ -6,68 +6,129 @@
   <title>Terms of Use – SolitaireDeck</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f1a; color: #e8e8f0; padding: 40px 20px; }
-    .container { max-width: 760px; margin: 0 auto; }
-    .back { color: #a78bfa; text-decoration: none; font-size: 0.9rem; display: inline-block; margin-bottom: 32px; }
-    .back:hover { text-decoration: underline; }
-    h1 { font-size: 2rem; font-weight: 700; margin-bottom: 6px; }
-    .meta { color: #6b7280; font-size: 0.9rem; margin-bottom: 40px; }
-    h2 { font-size: 1.1rem; font-weight: 600; color: #a78bfa; margin: 32px 0 12px; }
-    p, li { color: #d1d5db; line-height: 1.75; font-size: 0.97rem; }
-    ul { padding-left: 20px; margin: 8px 0; }
-    li { margin-bottom: 6px; }
-    a { color: #60a5fa; }
-    .footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid #1f2937; color: #6b7280; font-size: 0.85rem; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at 50% 0%, #1d4f2f 0%, #0f2d1a 42%, #091d11 100%);
+      color: #e8f5ec;
+      min-height: 100vh;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    .cards-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .fc {
+      position: absolute; top: -90px; width: 52px; height: 74px; border-radius: 7px;
+      background: #fff; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      opacity: 0; animation: fall linear infinite;
+    }
+    .fc .tl { position: absolute; top: 4px; left: 5px; font-size: 10px; font-weight: 800; line-height: 1.2; }
+    .fc .br { position: absolute; bottom: 4px; right: 5px; font-size: 10px; font-weight: 800; transform: rotate(180deg); }
+    .fc.red { color: #cc2233; } .fc.black { color: #1a1a2e; }
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(var(--r)); opacity: 0; }
+      6% { opacity: 0.45; }
+      92% { opacity: 0.2; }
+      100% { transform: translateY(110vh) rotate(calc(var(--r) + var(--spin))); opacity: 0; }
+    }
+    .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 40px 20px 72px; }
+    .top { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 30px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: #e8f5ec; text-decoration: none; font-weight: 800; }
+    .brand-icon {
+      width: 34px; height: 34px; border-radius: 9px; background: rgba(46,204,113,.16);
+      border: 1px solid rgba(46,204,113,.35); display: grid; place-items: center; color: #2ecc71;
+    }
+    .nav { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav a { color: #9ed3ae; text-decoration: none; font-size: .9rem; }
+    .nav a:hover { color: #2ecc71; }
+    .doc {
+      background: rgba(9,29,17,.78);
+      border: 1px solid rgba(46,204,113,.25);
+      border-radius: 22px;
+      padding: 42px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.28);
+    }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin-bottom: 28px; letter-spacing: -1px; }
+    h2 { color: #2ecc71; font-size: 1.08rem; margin: 34px 0 10px; }
+    p, li { color: #cfe8d6; font-size: .98rem; }
+    ul { padding-left: 22px; margin: 8px 0 14px; }
+    a { color: #2ecc71; }
+    .footer { margin-top: 28px; color: #70a47f; font-size: .86rem; text-align: center; }
+    .footer a { color: #2ecc71; text-decoration: none; margin: 0 6px; }
+    @media (max-width: 620px) {
+      .top { flex-direction: column; align-items: flex-start; }
+      .doc { padding: 28px 22px; border-radius: 18px; }
+    }
   </style>
 </head>
 <body>
-<div class="container">
-  <a class="back" href="/">← SolitaireDeck</a>
-  <h1>Terms of Use</h1>
-  <div class="meta">Effective date: May 13, 2026 &nbsp;·&nbsp; Last updated: May 13, 2026</div>
+<div class="cards-bg" id="bg"></div>
 
-  <h2>1. Acceptance of Terms</h2>
-  <p>By downloading, installing, or using the Solitaire Deck mobile application (the "App"), you agree to be bound by these Terms of Use. If you do not agree, do not use the App.</p>
+<div class="page">
+  <div class="top">
+    <a class="brand" href="/"><span class="brand-icon">♠</span>SolitaireDeck</a>
+    <div class="nav">
+      <a href="/">Home</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+      <a href="mailto:support@SolitaireDeck.com">Support</a>
+    </div>
+  </div>
 
-  <h2>2. License</h2>
-  <p>We grant you a limited, non-exclusive, non-transferable, revocable license to install and use the App on a device you own or control, solely for personal, non-commercial entertainment purposes.</p>
+  <main class="doc">
+    <h1>Terms of Use</h1>
 
-  <h2>3. Restrictions</h2>
-  <p>You may not:</p>
-  <ul>
-    <li>Copy, modify, or distribute the App or any of its components</li>
-    <li>Reverse engineer, decompile, or disassemble the App</li>
-    <li>Use the App for any commercial or unlawful purpose</li>
-    <li>Use bots, cheats, exploits, or automation tools</li>
-    <li>Interfere with the App's operation</li>
-    <li>Remove or alter any proprietary notices within the App</li>
-  </ul>
+    <h2>1. Acceptance of Terms</h2>
+    <p>By downloading, installing, or using the Solitaire Deck mobile application (the "App"), you agree to be bound by these Terms of Use. If you do not agree, do not use the App.</p>
 
-  <h2>4. Advertising</h2>
-  <p>The App is free to play and supported by advertising. By using the App, you acknowledge that ads may be displayed. Ad content is provided by third-party networks — see our <a href="/privacy.html">Privacy Policy</a> for details.</p>
+    <h2>2. License</h2>
+    <p>We grant you a limited, non-exclusive, non-transferable, revocable license to install and use the App on a device you own or control, solely for personal, non-commercial entertainment purposes.</p>
 
-  <h2>5. In-App Purchases</h2>
-  <p>The App may offer optional in-app purchases processed by Google Play or Apple App Store under their respective payment terms. All purchases are final and non-refundable unless required by applicable law.</p>
+    <h2>3. Restrictions</h2>
+    <p>You may not:</p>
+    <ul>
+      <li>Copy, modify, or distribute the App or any of its components</li>
+      <li>Reverse engineer, decompile, or disassemble the App</li>
+      <li>Use the App for any commercial or unlawful purpose</li>
+      <li>Use bots, cheats, exploits, or automation tools</li>
+      <li>Interfere with the App's operation</li>
+      <li>Remove or alter any proprietary notices within the App</li>
+    </ul>
 
-  <h2>6. Intellectual Property</h2>
-  <p>All content in the App — including graphics, sounds, music, gameplay mechanics, text, and software — is owned by or licensed to SolitaireDeck and is protected by intellectual property laws. All rights not expressly granted are reserved.</p>
+    <h2>4. Advertising</h2>
+    <p>The App is free to play and supported by advertising. By using the App, you acknowledge that ads may be displayed. Ad content is provided by third-party networks — see our <a href="/privacy.html">Privacy Policy</a> for details.</p>
 
-  <h2>7. Disclaimer of Warranties</h2>
-  <p>THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND. We do not warrant that the App will be error-free, uninterrupted, or that game progress will be preserved through all updates.</p>
+    <h2>5. In-App Purchases</h2>
+    <p>The App may offer optional in-app purchases processed by Google Play or Apple App Store under their respective payment terms. All purchases are final and non-refundable unless required by applicable law.</p>
 
-  <h2>8. Limitation of Liability</h2>
-  <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES ARISING FROM YOUR USE OF OR INABILITY TO USE THE APP. Our total liability shall not exceed the amount you paid us in the past 12 months (or $5 USD if nothing was paid).</p>
+    <h2>6. Intellectual Property</h2>
+    <p>All content in the App — including graphics, sounds, music, gameplay mechanics, text, and software — is owned by or licensed to SolitaireDeck and is protected by intellectual property laws. All rights not expressly granted are reserved.</p>
 
-  <h2>9. Modifications and Termination</h2>
-  <p>We may modify, update, or discontinue the App at any time, and may update these Terms. Continued use after changes constitutes acceptance. We may suspend or terminate your access if you violate these Terms.</p>
+    <h2>7. Disclaimer of Warranties</h2>
+    <p>THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND. We do not warrant that the App will be error-free, uninterrupted, or that game progress will be preserved through all updates.</p>
 
-  <h2>10. Third-Party Services</h2>
-  <p>The App integrates third-party SDKs and services. Your use of such services is subject to those parties' own terms and privacy policies.</p>
+    <h2>8. Limitation of Liability</h2>
+    <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES ARISING FROM YOUR USE OF OR INABILITY TO USE THE APP. Our total liability shall not exceed the amount you paid us in the past 12 months (or $5 USD if nothing was paid).</p>
 
-  <h2>11. Contact</h2>
-  <p>Email: <a href="mailto:support@SolitaireDeck.com">support@SolitaireDeck.com</a><br>Website: <a href="https://SolitaireDeck.com">SolitaireDeck.com</a></p>
+    <h2>9. Modifications and Termination</h2>
+    <p>We may modify, update, or discontinue the App at any time, and may update these Terms. Continued use after changes constitutes acceptance. We may suspend or terminate your access if you violate these Terms.</p>
 
-  <div class="footer">© 2026 SolitaireDeck · <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></div>
+    <h2>10. Third-Party Services</h2>
+    <p>The App integrates third-party SDKs and services. Your use of such services is subject to those parties' own terms and privacy policies.</p>
+
+    <h2>11. Contact</h2>
+    <p>Email: <a href="mailto:support@SolitaireDeck.com">support@SolitaireDeck.com</a><br>Website: <a href="https://SolitaireDeck.com">SolitaireDeck.com</a></p>
+  </main>
+
+  <div class="footer">
+    © 2026 SolitaireDeck · <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a>
+  </div>
 </div>
+
+<script>
+  var CARDS=[{v:'A',s:'♠',c:'black'},{v:'K',s:'♥',c:'red'},{v:'Q',s:'♦',c:'red'},{v:'J',s:'♣',c:'black'},{v:'10',s:'♠',c:'black'},{v:'9',s:'♥',c:'red'},{v:'8',s:'♦',c:'red'},{v:'7',s:'♣',c:'black'}];
+  var bg=document.getElementById('bg');
+  for(var i=0;i<CARDS.length;i++){var c=CARDS[i],el=document.createElement('div');el.className='fc '+c.c;el.innerHTML='<span class="tl">'+c.v+'<br>'+c.s+'</span>'+c.s+'<span class="br">'+c.v+'<br>'+c.s+'</span>';var d=12+Math.random()*16;el.style.left=(4+Math.random()*90)+'%';el.style.animationDuration=d+'s';el.style.animationDelay=-(Math.random()*d)+'s';el.style.setProperty('--r',(-25+Math.random()*50)+'deg');el.style.setProperty('--spin',((Math.random()>.5?1:-1)*(20+Math.random()*40))+'deg');bg.appendChild(el);}
+</script>
 </body>
 </html>
