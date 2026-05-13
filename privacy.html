@@ -6,116 +6,180 @@
   <title>Privacy Policy – SolitaireDeck</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f1a; color: #e8e8f0; padding: 40px 20px; }
-    .container { max-width: 760px; margin: 0 auto; }
-    .back { color: #a78bfa; text-decoration: none; font-size: 0.9rem; display: inline-block; margin-bottom: 32px; }
-    .back:hover { text-decoration: underline; }
-    h1 { font-size: 2rem; font-weight: 700; margin-bottom: 6px; }
-    .meta { color: #6b7280; font-size: 0.9rem; margin-bottom: 40px; }
-    h2 { font-size: 1.1rem; font-weight: 600; color: #a78bfa; margin: 32px 0 12px; }
-    p, li { color: #d1d5db; line-height: 1.75; font-size: 0.97rem; }
-    ul { padding-left: 20px; margin: 8px 0; }
-    li { margin-bottom: 6px; }
-    a { color: #60a5fa; }
-    .divider { border: none; border-top: 1px solid #1f2937; margin: 8px 0; }
-    .footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid #1f2937; color: #6b7280; font-size: 0.85rem; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at 50% 0%, #1d4f2f 0%, #0f2d1a 42%, #091d11 100%);
+      color: #e8f5ec;
+      min-height: 100vh;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    .cards-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .fc {
+      position: absolute; top: -90px; width: 52px; height: 74px; border-radius: 7px;
+      background: #fff; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      opacity: 0; animation: fall linear infinite;
+    }
+    .fc .tl { position: absolute; top: 4px; left: 5px; font-size: 10px; font-weight: 800; line-height: 1.2; }
+    .fc .br { position: absolute; bottom: 4px; right: 5px; font-size: 10px; font-weight: 800; transform: rotate(180deg); }
+    .fc.red { color: #cc2233; } .fc.black { color: #1a1a2e; }
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(var(--r)); opacity: 0; }
+      6% { opacity: 0.45; }
+      92% { opacity: 0.2; }
+      100% { transform: translateY(110vh) rotate(calc(var(--r) + var(--spin))); opacity: 0; }
+    }
+    .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 40px 20px 72px; }
+    .top { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 30px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: #e8f5ec; text-decoration: none; font-weight: 800; }
+    .brand-icon {
+      width: 34px; height: 34px; border-radius: 9px; background: rgba(46,204,113,.16);
+      border: 1px solid rgba(46,204,113,.35); display: grid; place-items: center; color: #2ecc71;
+    }
+    .nav { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav a { color: #9ed3ae; text-decoration: none; font-size: .9rem; }
+    .nav a:hover { color: #2ecc71; }
+    .doc {
+      background: rgba(9,29,17,.78);
+      border: 1px solid rgba(46,204,113,.25);
+      border-radius: 22px;
+      padding: 42px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.28);
+    }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin-bottom: 28px; letter-spacing: -1px; }
+    h2 { color: #2ecc71; font-size: 1.08rem; margin: 34px 0 10px; }
+    p, li { color: #cfe8d6; font-size: .98rem; }
+    ul { padding-left: 22px; margin: 8px 0 14px; }
+    a { color: #2ecc71; }
+    .footer { margin-top: 28px; color: #70a47f; font-size: .86rem; text-align: center; }
+    .footer a { color: #2ecc71; text-decoration: none; margin: 0 6px; }
+    @media (max-width: 620px) {
+      .top { flex-direction: column; align-items: flex-start; }
+      .doc { padding: 28px 22px; border-radius: 18px; }
+    }
   </style>
 </head>
 <body>
-<div class="container">
-  <a class="back" href="/">← SolitaireDeck</a>
-  <h1>Privacy Policy</h1>
-  <div class="meta">Effective date: May 13, 2026 &nbsp;·&nbsp; Last updated: May 13, 2026</div>
+<div class="cards-bg" id="bg"></div>
 
-  <h2>1. Introduction</h2>
-  <p>This Privacy Policy explains how SolitaireDeck ("we", "our", or "us") collects, uses, and protects information when you use our mobile application Solitaire Deck (the "App"). By downloading or using the App, you acknowledge you have read this Privacy Policy.</p>
+<div class="page">
+  <div class="top">
+    <a class="brand" href="/"><span class="brand-icon">♠</span>SolitaireDeck</a>
+    <div class="nav">
+      <a href="/">Home</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+      <a href="mailto:support@SolitaireDeck.com">Support</a>
+    </div>
+  </div>
 
-  <h2>2. Information We Collect</h2>
-  <p><strong>Data stored on your device:</strong></p>
-  <ul>
-    <li>Game progress, scores, and statistics</li>
-    <li>Settings and preferences (theme, audio, language)</li>
-    <li>App configuration data</li>
-  </ul>
-  <p style="margin-top:12px"><strong>Automatically collected technical data:</strong></p>
-  <ul>
-    <li>App events (game start, end, win/loss, moves, hints used)</li>
-    <li>Session length and frequency</li>
-    <li>Device type, OS version, language, and region</li>
-    <li>Crash reports and diagnostic data</li>
-    <li>Advertising identifier (IDFA / GAID), subject to your consent</li>
-  </ul>
-  <p style="margin-top:12px">We do not collect your name, email address, phone number, or precise GPS location.</p>
+  <main class="doc">
+    <h1>Privacy Policy</h1>
 
-  <h2>3. How We Use Your Information</h2>
-  <ul>
-    <li>Provide and improve game features and stability</li>
-    <li>Diagnose and fix crashes and bugs</li>
-    <li>Analyze gameplay to improve balance</li>
-    <li>Deliver relevant advertising</li>
-    <li>Measure advertising effectiveness and install attribution</li>
-    <li>Comply with legal obligations</li>
-  </ul>
+    <h2>1. Introduction</h2>
+    <p>This Privacy Policy explains how SolitaireDeck ("we", "our", or "us") collects, uses, and protects information when you use our mobile application Solitaire Deck (the "App"). By downloading or using the App, you acknowledge you have read this Privacy Policy.</p>
 
-  <h2>4. Third-Party Service Providers</h2>
-  <p><strong>Analytics &amp; Crash Reporting</strong></p>
-  <ul>
-    <li>Firebase Analytics (Google LLC) – <a href="https://policies.google.com/privacy">Privacy Policy</a></li>
-    <li>Firebase Crashlytics (Google LLC) – <a href="https://policies.google.com/privacy">Privacy Policy</a></li>
-    <li>Firebase Remote Config (Google LLC) – <a href="https://policies.google.com/privacy">Privacy Policy</a></li>
-  </ul>
-  <p style="margin-top:12px"><strong>Attribution</strong></p>
-  <ul>
-    <li>AppsFlyer Ltd. – <a href="https://www.appsflyer.com/legal/services-privacy-policy/">Privacy Policy</a> · <a href="https://www.appsflyer.com/optout">Opt-out</a></li>
-  </ul>
-  <p style="margin-top:12px"><strong>Advertising (via Appodeal mediation)</strong></p>
-  <p>We use Appodeal as our ad mediation platform. Appodeal and its demand partners may serve ads and collect data about your interactions with those ads.</p>
-  <ul>
-    <li>Appodeal Inc. – <a href="https://appodeal.com/privacy-policy">Privacy Policy</a> (includes full list of demand partners)</li>
-    <li>Google AdMob – <a href="https://policies.google.com/privacy">Privacy Policy</a></li>
-    <li>Meta Audience Network – <a href="https://www.facebook.com/policy.php">Privacy Policy</a></li>
-    <li>AppLovin / MAX – <a href="https://www.applovin.com/privacy/">Privacy Policy</a></li>
-    <li>Unity Ads / ironSource – <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">Privacy Policy</a></li>
-    <li>Pangle (TikTok for Business) – <a href="https://www.pangleglobal.com/privacy">Privacy Policy</a></li>
-    <li>Vungle / Liftoff Monetize – <a href="https://liftoff.io/privacy-policy/">Privacy Policy</a></li>
-    <li>Chartboost – <a href="https://www.chartboost.com/privacy-policy/">Privacy Policy</a></li>
-    <li>Amazon Publisher Services – <a href="https://aps.amazon.com/aps/privacy-policy/">Privacy Policy</a></li>
-    <li>InMobi – <a href="https://www.inmobi.com/privacy-policy/">Privacy Policy</a></li>
-    <li>BidMachine – <a href="https://bidmachine.io/privacy-policy/">Privacy Policy</a></li>
-  </ul>
+    <h2>2. Information We Collect</h2>
+    <p><strong>Data stored on your device:</strong></p>
+    <ul>
+      <li>Game progress, scores, and statistics</li>
+      <li>Settings and preferences (theme, audio, language)</li>
+      <li>App configuration data</li>
+    </ul>
 
-  <h2>5. Advertising Identifier &amp; Tracking (iOS)</h2>
-  <p>On iOS, we may request permission to access your Advertising Identifier (IDFA) via the App Tracking Transparency (ATT) framework before using it for personalized advertising. You can change this permission at any time in: <strong>iOS Settings → Privacy &amp; Security → Tracking</strong>.</p>
+    <p><strong>Automatically collected technical data:</strong></p>
+    <ul>
+      <li>App events (game start, end, win/loss, moves, hints used)</li>
+      <li>Session length and frequency</li>
+      <li>Device type, OS version, language, and region</li>
+      <li>Crash reports and diagnostic data</li>
+      <li>Advertising identifier (IDFA / GAID), subject to your consent</li>
+    </ul>
 
-  <h2>6. EU/EEA Users — GDPR</h2>
-  <p>If you are located in the EU, EEA, or UK, you have the right to access, rectify, erase, restrict, or port your data, and to withdraw consent at any time. A consent screen is shown on first launch in EU/EEA countries. To exercise your rights, contact: <a href="mailto:support@SolitaireDeck.com">support@SolitaireDeck.com</a>. We will respond within 30 days.</p>
+    <p>We do not collect your name, email address, phone number, or precise GPS location.</p>
 
-  <h2>7. California Residents — CCPA</h2>
-  <p>California residents may request to know, delete, or opt out of the sale of personal information. We do not sell your personal information for monetary consideration. To submit a request: <a href="mailto:support@SolitaireDeck.com">support@SolitaireDeck.com</a>.</p>
+    <h2>3. How We Use Your Information</h2>
+    <ul>
+      <li>Provide and improve game features and stability</li>
+      <li>Diagnose and fix crashes and bugs</li>
+      <li>Analyze gameplay to improve balance</li>
+      <li>Deliver relevant advertising</li>
+      <li>Measure advertising effectiveness and install attribution</li>
+      <li>Comply with legal obligations</li>
+    </ul>
 
-  <h2>8. Children's Privacy</h2>
-  <p>The App is not directed to children under 13 (or 16 in the EU/EEA). We do not knowingly collect personal data from children. Contact us at <a href="mailto:support@SolitaireDeck.com">support@SolitaireDeck.com</a> to request deletion of any such data.</p>
+    <h2>4. Third-Party Service Providers</h2>
+    <p><strong>Analytics &amp; Crash Reporting</strong></p>
+    <ul>
+      <li>Firebase Analytics (Google LLC) – <a href="https://policies.google.com/privacy">Privacy Policy</a></li>
+      <li>Firebase Crashlytics (Google LLC) – <a href="https://policies.google.com/privacy">Privacy Policy</a></li>
+      <li>Firebase Remote Config (Google LLC) – <a href="https://policies.google.com/privacy">Privacy Policy</a></li>
+    </ul>
 
-  <h2>9. Data Retention</h2>
-  <ul>
-    <li>Local device data: retained until you uninstall the App</li>
-    <li>Analytics data: per each provider's retention schedule</li>
-    <li>Crash logs: up to 90 days</li>
-  </ul>
+    <p><strong>Attribution</strong></p>
+    <ul>
+      <li>AppsFlyer Ltd. – <a href="https://www.appsflyer.com/legal/services-privacy-policy/">Privacy Policy</a> · <a href="https://www.appsflyer.com/optout">Opt-out</a></li>
+    </ul>
 
-  <h2>10. Data Security</h2>
-  <p>We implement reasonable technical and organizational measures to protect your information. No method of transmission over the Internet is 100% secure.</p>
+    <p><strong>Advertising (via Appodeal mediation)</strong></p>
+    <p>We use Appodeal as our ad mediation platform. Appodeal and its demand partners may serve ads and collect data about your interactions with those ads.</p>
+    <ul>
+      <li>Appodeal Inc. – <a href="https://appodeal.com/privacy-policy">Privacy Policy</a> (includes full list of demand partners)</li>
+      <li>Google AdMob – <a href="https://policies.google.com/privacy">Privacy Policy</a></li>
+      <li>Meta Audience Network – <a href="https://www.facebook.com/policy.php">Privacy Policy</a></li>
+      <li>AppLovin / MAX – <a href="https://www.applovin.com/privacy/">Privacy Policy</a></li>
+      <li>Unity Ads / ironSource – <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">Privacy Policy</a></li>
+      <li>Pangle (TikTok for Business) – <a href="https://www.pangleglobal.com/privacy">Privacy Policy</a></li>
+      <li>Vungle / Liftoff Monetize – <a href="https://liftoff.io/privacy-policy/">Privacy Policy</a></li>
+      <li>Chartboost – <a href="https://www.chartboost.com/privacy-policy/">Privacy Policy</a></li>
+      <li>Amazon Publisher Services – <a href="https://aps.amazon.com/aps/privacy-policy/">Privacy Policy</a></li>
+      <li>InMobi – <a href="https://www.inmobi.com/privacy-policy/">Privacy Policy</a></li>
+      <li>BidMachine – <a href="https://bidmachine.io/privacy-policy/">Privacy Policy</a></li>
+    </ul>
 
-  <h2>11. International Data Transfers</h2>
-  <p>Data may be transferred to and processed in countries outside your residence, including the United States, in accordance with applicable law.</p>
+    <h2>5. Advertising Identifier &amp; Tracking (iOS)</h2>
+    <p>On iOS, we may request permission to access your Advertising Identifier (IDFA) via the App Tracking Transparency (ATT) framework before using it for personalized advertising. You can change this permission at any time in: iOS Settings → Privacy &amp; Security → Tracking.</p>
 
-  <h2>12. Changes to This Policy</h2>
-  <p>We may update this Privacy Policy from time to time. The updated version will be reflected by a new "Last updated" date and will be accessible within the App and at this page.</p>
+    <h2>6. EU/EEA Users — GDPR</h2>
+    <p>If you are located in the EU, EEA, or UK, you have the right to access, rectify, erase, restrict, or port your data, and to withdraw consent at any time. A consent screen is shown on first launch in EU/EEA countries. To exercise your rights, contact: <a href="mailto:support@SolitaireDeck.com">support@SolitaireDeck.com</a>. We will respond within 30 days.</p>
 
-  <h2>13. Contact Us</h2>
-  <p>Email: <a href="mailto:support@SolitaireDeck.com">support@SolitaireDeck.com</a><br>Website: <a href="https://SolitaireDeck.com">SolitaireDeck.com</a></p>
+    <h2>7. California Residents — CCPA</h2>
+    <p>California residents may request to know, delete, or opt out of the sale of personal information. We do not sell your personal information for monetary consideration. To submit a request: <a href="mailto:support@SolitaireDeck.com">support@SolitaireDeck.com</a>.</p>
 
-  <div class="footer">© 2026 SolitaireDeck · <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a></div>
+    <h2>8. Children's Privacy</h2>
+    <p>The App is not directed to children under 13 (or 16 in the EU/EEA). We do not knowingly collect personal data from children. Contact us at <a href="mailto:support@SolitaireDeck.com">support@SolitaireDeck.com</a> to request deletion of any such data.</p>
+
+    <h2>9. Data Retention</h2>
+    <ul>
+      <li>Local device data: retained until you uninstall the App</li>
+      <li>Analytics data: per each provider's retention schedule</li>
+      <li>Crash logs: up to 90 days</li>
+    </ul>
+
+    <h2>10. Data Security</h2>
+    <p>We implement reasonable technical and organizational measures to protect your information. No method of transmission over the Internet is 100% secure.</p>
+
+    <h2>11. International Data Transfers</h2>
+    <p>Data may be transferred to and processed in countries outside your residence, including the United States, in accordance with applicable law.</p>
+
+    <h2>12. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. The updated version will be reflected by a new "Last updated" date and will be accessible within the App and at this page.</p>
+
+    <h2>13. Contact Us</h2>
+    <p>Email: <a href="mailto:support@SolitaireDeck.com">support@SolitaireDeck.com</a><br>Website: <a href="https://SolitaireDeck.com">SolitaireDeck.com</a></p>
+  </main>
+
+  <div class="footer">
+    © 2026 SolitaireDeck · <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a>
+  </div>
 </div>
+
+<script>
+  var CARDS=[{v:'A',s:'♠',c:'black'},{v:'K',s:'♥',c:'red'},{v:'Q',s:'♦',c:'red'},{v:'J',s:'♣',c:'black'},{v:'10',s:'♠',c:'black'},{v:'9',s:'♥',c:'red'},{v:'8',s:'♦',c:'red'},{v:'7',s:'♣',c:'black'}];
+  var bg=document.getElementById('bg');
+  for(var i=0;i<CARDS.length;i++){var c=CARDS[i],el=document.createElement('div');el.className='fc '+c.c;el.innerHTML='<span class="tl">'+c.v+'<br>'+c.s+'</span>'+c.s+'<span class="br">'+c.v+'<br>'+c.s+'</span>';var d=12+Math.random()*16;el.style.left=(4+Math.random()*90)+'%';el.style.animationDuration=d+'s';el.style.animationDelay=-(Math.random()*d)+'s';el.style.setProperty('--r',(-25+Math.random()*50)+'deg');el.style.setProperty('--spin',((Math.random()>.5?1:-1)*(20+Math.random()*40))+'deg');bg.appendChild(el);}
+</script>
 </body>
 </html>
